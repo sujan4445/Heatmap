@@ -1,0 +1,27 @@
+# Load required libraries
+library(pheatmap)
+library(readr)
+
+# Prepare your STI data
+STI_data <- as.data.frame(STI)
+rownames(STI_data) <- STI_data$GEN
+STI_data <- STI_data[, -which(names(STI_data) == "GEN")]
+
+
+# Set TIFF output
+tiff("STI_heatmap111.tiff", width = 2000, height = 1500, res = 300)
+
+# Plot heatmap with original values
+pheatmap(STI_matrix,
+         clustering_distance_rows = "euclidean",
+         clustering_method = "complete",
+         cluster_cols = FALSE,
+         show_rownames = TRUE,
+         show_colnames = TRUE,
+         fontsize_row = 8,
+         fontsize_col = 8,
+         main = "",
+         treeheight_row = 50,
+         fontfamily = "Times")
+
+dev.off()
